@@ -1,0 +1,40 @@
+main: me.jonathan.Gen
+name: Genesis-network
+version: 1.0.0
+prefix: Genesis-network
+description: Genesis network
+api-version: 1.18
+author: Jonathan_Nathan
+website: Garconia.ddns.net
+soft-depend: [ItemsAdder]
+permissions:
+  gennetwork.*:
+    default: op
+    description: gives all perms
+    children:
+      gennetwork.command.minigames: true
+  gennetwork.command.*:
+    default: op
+    description: gives all command perms
+    children:
+      gennetwork.command.minigames: true
+  gennetwork.command.minigames:
+    description: allows the user to join a minigame
+    default: true
+  gennetwork.command.reload:
+    description: allows the user to reload the plugin
+    default: op
+commands:
+  minigames:
+    default: true
+    permission: gennetwork.command.minigames
+    description: allows the user to use the minigame options
+    permission-message: You do not have permission to use this command.
+    usage: "Usage: /<command> [Sub command] [sub-command]"
+  genreload:
+    default: op
+    permission: gennetwork.command.reload
+    description: allows the user to reload the plugin
+    permission-message: You do not have permission to use this command.
+    usage: "Usage: /<command>"
+
