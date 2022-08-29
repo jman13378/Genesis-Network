@@ -23,7 +23,14 @@ public class Reload implements TabExecutor {
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("genreload")) {
-			
+			if (args[0].equals("PLUGIN")) if (sender.hasPermission("minecraft.command.reload")) {
+				Gen.getInstance().getServer().getPluginManager().disablePlugin(Gen.getInstance());
+				Gen.getInstance().getServer().getPluginManager().enablePlugin(Gen.getInstance());
+				Gen.getInstance().reloadConfig();
+				Gen.getInstance().reloadCTConfig();
+				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&3Plugin reloaded!"));
+				return true;
+			}
 			if (args[0].equals("ALL")) {
 				Gen.getInstance().reloadConfig();
 				Gen.getInstance().reloadCTConfig();
@@ -40,7 +47,7 @@ public class Reload implements TabExecutor {
 				Bukkit.getLogger().info("The Color-Takeover config has been reloaded");
 				sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&3Reload complete!"));
 			} else {
-				sender.sendMessage("Please choose one of the options [ALL|NORMAL|COLOR-TAKEOVER");
+				sender.sendMessage("Please choose one of the options [ALL|NORMAL|COLOR-TAKEOVER]");
 			}
 			
 			
@@ -49,13 +56,15 @@ public class Reload implements TabExecutor {
 	}
 
 	
-	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
 		List<String> completions = new ArrayList<>();
 		if (args.length==1) {
 			completions.add("ALL");
 			completions.add("NORMAL");
 			completions.add("COLOR-TAKEOVER");
+			if (sender.hasPermission("minecraft.command.reload")) {
+				completions.add("PLUGIN");
+			}
 			return completions;
 		}
 		return null;

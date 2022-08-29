@@ -30,7 +30,7 @@ public class Join implements TabExecutor  {
 		Player player = (Player) sender;
 		if (args[0].equals("join")) {
 			if (args[1].equals("Color-Takeover")) {
-				if (config.getBoolean("gui.enabled")) CT.openTCmenu(player);
+				if (config.getBoolean("gui.enabled")) {CT.openTCmenu(player);return true;}
 				// what i have above this will solve it all this is a waste of code the statements under this
 				
 			}

@@ -6,6 +6,7 @@ package me.jonathan.minigames.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import me.jonathan.Gen;
@@ -40,6 +41,21 @@ public class MatchUtil {
 		}
 		
 	}
+	public static boolean startMatch(Integer gamenumber) {
+		
+		if (Main.CTclosedmaps.contains(gamenumber)) {
+			Main.CTclosedmaps.add(gamenumber);
+			return true;
+		}
+		
+		return false;
+	}
 	
+	
+	public static void sendError(Error error) {
+		int code=Error.getCode(error);
+		String msg=Error.getErrorMessage(error);
+		Bukkit.getLogger().warning("ERROR CODE: " + code + " Response: " + msg);
+	}
 	
 }

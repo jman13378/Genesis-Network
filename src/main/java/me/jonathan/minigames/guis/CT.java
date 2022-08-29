@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
@@ -42,7 +43,7 @@ public class CT {
 			lore.add(Component.text("Max Players: " + config.getInt(Main.CTopenmaps.get(i) + ".max-players")));
 			lore.add(Component.text("Min Players: " + config.getInt(Main.CTopenmaps.get(i) + ".min-players")));
 			lore.add(Component.text("Time Limit: " + config.getInt(Main.CTopenmaps.get(i) + ".timelimit")));
-			GuiItem item = ItemBuilder.from(Material.EMERALD)
+			GuiItem item = ItemBuilder.from(Material.getMaterial(config.getString(Main.CTopenmaps.get(i) + ".gui.open")))
 					.name(Component.text("Game: " +  Main.CTopenmaps.get(i)))
 					.lore(lore)
 					.asGuiItem(event -> {
@@ -51,10 +52,17 @@ public class CT {
 						Player p = (Player) event.getWhoClicked();
 						FileConfiguration mconfig = Gen.getInstance().getCTConfig();
 						p.sendMessage("sending you to Color Takeover...");
-						World env = Bukkit.getWorld(mconfig.getString(game +".world"));
-						Location loc = new Location(env, mconfig.getDouble(game +".xCord"),mconfig.getDouble(game +".yCord"), mconfig.getDouble(game +".zCord"));
-						p.teleport(loc);
-						Main.CT.put(p, game);
+						new BukkitRunnable() {
+							@Override
+							public void run() {
+								World env = Bukkit.getWorld(mconfig.getString(game +".world"));
+								Location loc = new Location(env, mconfig.getDouble(game +".xCord"),mconfig.getDouble(game +".yCord"), mconfig.getDouble(game +".zCord"));
+								p.teleport(loc);
+								Main.CT.put(p, game);
+							}
+						}.runTaskLater(Gen.getInstance(), 20L);
+						
+						
 					});
 			gui.addItem(item);
 		}
@@ -63,7 +71,7 @@ public class CT {
 			lore.add(Component.text("Max Players: " + config.getInt(Main.CTopenmaps.get(i) + ".max-players")));
 			lore.add(Component.text("Min Players: " + config.getInt(Main.CTopenmaps.get(i) + ".min-players")));
 			lore.add(Component.text("Time Limit: " + config.getInt(Main.CTopenmaps.get(i) + ".timelimit")));
-			GuiItem item = ItemBuilder.from(Material.EMERALD)
+			GuiItem item = ItemBuilder.from(Material.getMaterial(config.getString(Main.CTclosedmaps.get(i) + ".closed")))
 					.name(Component.text("Game: " +Main.CTclosedmaps.get(i) + "In Session"))
 					.lore(lore)
 					.asGuiItem();

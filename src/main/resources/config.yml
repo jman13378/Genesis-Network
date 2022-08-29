@@ -2,10 +2,10 @@ minigames:
   color-takeover:
     enabled: false
 
-
+## for the minigames
 gui:
   enabled: false ## PLEASE JUST USE THIS I DONT WANNA IMPLEMENT COMMANDPANELS BECAUSE THEY DONT HAVE A MAVEN REPO
-  cp-override: ## if `gui.enabled == true` then `gui.cp-override == false`
+  cp-override: ## if `gui.enabled == true` then `gui.cp-override == false` ## please use commands: - event= "gamenumber %cp-player-name%"
     enabled: true
     panelname:
-    event: ## the event message placeholders %game-number%
+    identifier: ## all message that want to be recieved from cp need to start with this

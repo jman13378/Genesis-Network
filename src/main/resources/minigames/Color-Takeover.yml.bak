@@ -6,5 +6,9 @@
   max-players:
   min-players:
   timelimit:
+  gui:
+    open: ## Material
+    closed: ## Material
+    material: ## Material
   bossbar:
-    enabled:
+    enabled: true

@@ -19,6 +19,8 @@ import com.google.common.base.Charsets;
 import me.jonathan.events.Events;
 import me.jonathan.minigames.commands.Join;
 import me.jonathan.minigames.commands.Reload;
+import me.jonathan.minigames.util.Error;
+import me.jonathan.minigames.util.MatchUtil;
 
 /**
  * @author jonah
@@ -51,6 +53,7 @@ public class Gen extends JavaPlugin{
 		reloadConfig();
 		getServer().getPluginManager().registerEvents(new me.jonathan.minigames.events.Events(), this);
 		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Genesis network] Plugin Has Been Enabled!");
+		MatchUtil.sendError(Error.MATCHEXISTS);
 	}
 	@Override
 	public void onDisable() {
