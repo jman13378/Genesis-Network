@@ -6,6 +6,7 @@ description: Genesis network
 api-version: 1.18
 author: Jonathan_Nathan
 website: Garconia.ddns.net
+depend: [ProtocolLib]
 soft-depend: [ItemsAdder]
 permissions:
   gennetwork.*:

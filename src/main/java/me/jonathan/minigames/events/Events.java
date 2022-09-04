@@ -19,6 +19,7 @@ import me.rockyhawk.commandpanels.api.PanelCommandEvent;
  * @author jonah
  * 
  */
+@SuppressWarnings("unused")
 public class Events implements Listener {
 
 	@EventHandler
@@ -28,6 +29,8 @@ public class Events implements Listener {
 				
 		}
 	}
+	
+	
 	
 	@EventHandler
 	public static void cpevent(PanelCommandEvent event) {
@@ -42,6 +45,7 @@ public class Events implements Listener {
 				
 			{
 				String[] args = rawMsg.split("\\s+");
+				
 				String gamenumber = args[0];
 				Player player = Bukkit.getPlayer(args[1]);
 				

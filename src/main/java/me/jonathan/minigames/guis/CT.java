@@ -30,28 +30,29 @@ public class CT {
 
 	//// if this doesn't get used i wasted 1 and a half hours working on this
 	public static void openTCmenu(Player player) {
-		FileConfiguration config = Gen.getInstance().getCTConfig();
-		MatchUtil.openmatch();
+		MatchUtil.getMatchCount();
+		FileConfiguration config = Gen.getInstance().getConfig();
+		FileConfiguration mconfig = Gen.getInstance().getCTConfig();
 		Gui gui = Gui.gui()
-				.title(Component.text("lol"))
+				.title(Component.text(config.getString("gui.title")))
 				.rows(3)
 				.disableAllInteractions()
 				.create();
 		for (int i = 0; i < Main.CTopenmaps.size(); i++) {
 			List<Component> lore = new ArrayList<Component>();
 			lore.add(Component.text("Left Click: Click to join this game."));
-			lore.add(Component.text("Max Players: " + config.getInt(Main.CTopenmaps.get(i) + ".max-players")));
-			lore.add(Component.text("Min Players: " + config.getInt(Main.CTopenmaps.get(i) + ".min-players")));
-			lore.add(Component.text("Time Limit: " + config.getInt(Main.CTopenmaps.get(i) + ".timelimit")));
-			GuiItem item = ItemBuilder.from(Material.getMaterial(config.getString(Main.CTopenmaps.get(i) + ".gui.open")))
+			lore.add(Component.text("Max Players: " + mconfig.getInt(Main.CTopenmaps.get(i) + ".max-players")));
+			lore.add(Component.text("Min Players: " + mconfig.getInt(Main.CTopenmaps.get(i) + ".min-players")));
+			lore.add(Component.text("Time Limit: " + mconfig.getInt(Main.CTopenmaps.get(i) + ".timelimit")));
+			GuiItem item = ItemBuilder.from(Material.getMaterial(mconfig.getString(Main.CTopenmaps.get(i) + ".gui.open")))
 					.name(Component.text("Game: " +  Main.CTopenmaps.get(i)))
 					.lore(lore)
 					.asGuiItem(event -> {
 						if (!event.isLeftClick()) return;
 						String game = event.getCurrentItem().getItemMeta().getDisplayName().replace("Game: ", "");
 						Player p = (Player) event.getWhoClicked();
-						FileConfiguration mconfig = Gen.getInstance().getCTConfig();
 						p.sendMessage("sending you to Color Takeover...");
+						Bukkit.broadcastMessage(p.getDisplayName() + "Has joined Color-Takeover");
 						new BukkitRunnable() {
 							@Override
 							public void run() {
@@ -60,7 +61,7 @@ public class CT {
 								p.teleport(loc);
 								Main.CT.put(p, game);
 							}
-						}.runTaskLater(Gen.getInstance(), 20L);
+						}.runTaskLater(Gen.getInstance(), 60L);
 						
 						
 					});
@@ -68,10 +69,10 @@ public class CT {
 		}
 		for (int i = 0; i < Main.CTclosedmaps.size(); i++) {
 			List<Component> lore = new ArrayList<Component>();
-			lore.add(Component.text("Max Players: " + config.getInt(Main.CTopenmaps.get(i) + ".max-players")));
-			lore.add(Component.text("Min Players: " + config.getInt(Main.CTopenmaps.get(i) + ".min-players")));
-			lore.add(Component.text("Time Limit: " + config.getInt(Main.CTopenmaps.get(i) + ".timelimit")));
-			GuiItem item = ItemBuilder.from(Material.getMaterial(config.getString(Main.CTclosedmaps.get(i) + ".closed")))
+			lore.add(Component.text("Max Players: " + mconfig.getInt(Main.CTopenmaps.get(i) + ".max-players")));
+			lore.add(Component.text("Min Players: " + mconfig.getInt(Main.CTopenmaps.get(i) + ".min-players")));
+			lore.add(Component.text("Time Limit: " + mconfig.getInt(Main.CTopenmaps.get(i) + ".timelimit")));
+			GuiItem item = ItemBuilder.from(Material.getMaterial(mconfig.getString(Main.CTclosedmaps.get(i) + ".closed")))
 					.name(Component.text("Game: " +Main.CTclosedmaps.get(i) + "In Session"))
 					.lore(lore)
 					.asGuiItem();

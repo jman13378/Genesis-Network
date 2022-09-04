@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 
 import me.jonathan.Gen;
 import me.jonathan.minigames.guis.CT;
+import me.jonathan.minigames.states.PregameState;
 
 /**
  * @author jonah
@@ -28,6 +29,9 @@ public class Join implements TabExecutor  {
 		if (!(sender instanceof Player)) sender.sendMessage("Sorry this cannot be executed from console!");
 		FileConfiguration config = Gen.getInstance().getConfig();
 		Player player = (Player) sender;
+		PregameState state = new PregameState(Gen.getInstance());
+		state.start();
+		state.end();
 		if (args[0].equals("join")) {
 			if (args[1].equals("Color-Takeover")) {
 				if (config.getBoolean("gui.enabled")) {CT.openTCmenu(player);return true;}

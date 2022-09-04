@@ -1,7 +1,7 @@
 main: me.jonathan.Gen
 name: Genesis-network
 version: 1.0.0
-prefix: AuctionHouse
+prefix: Genesis-network
 description: Genesis network
 api-version: 1.18
 author: Jonathan_Nathan

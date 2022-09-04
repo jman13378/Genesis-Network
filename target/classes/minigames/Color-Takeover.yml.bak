@@ -7,8 +7,8 @@
   min-players:
   timelimit:
   gui:
-    open:
-    closed:
-    material:
+    open: ## Material
+    closed: ## Material
+    material: ## Material
   bossbar:
     enabled: true
